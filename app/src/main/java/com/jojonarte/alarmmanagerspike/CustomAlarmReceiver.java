@@ -36,8 +36,6 @@ public class CustomAlarmReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Toast.makeText(context, "IN RECEIVER", Toast.LENGTH_SHORT).show();
-        Log.e("HELLOZZZZ", "RECEIVED BROADCAST");
         this.context = context;
         // registers NotificationChannel (Required for ANDROID O Above.)
         createNotificationChannel();
