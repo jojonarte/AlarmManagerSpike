@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -38,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, CustomAlarmReceiver.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         int numInputValue = Integer.parseInt(numInputText);
-        long timeToTrigger = numInputValue * 1000; // minutes to trigger based on passed minute value in input
+        long timeToTrigger = numInputValue * 1000 * 60; // minutes to trigger based on passed minute value in input
         PendingIntent pendingIntent = PendingIntent.getBroadcast(
                 this,
                 ALARM_REQ_ID, intent,
@@ -47,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
                 AlarmManager.ELAPSED_REALTIME_WAKEUP,
                 SystemClock.elapsedRealtime() + timeToTrigger,
                 pendingIntent);
+        numInput.setText("");
+        Toast.makeText(this, "Request scheduled to trigger after " + numInputText + " minutes.", Toast.LENGTH_SHORT).show();
     }
 
 }
